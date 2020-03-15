@@ -12,11 +12,10 @@
     (.setSize (.getWidth image) (.getHeight image))))
 
 (comment
-  (let [camera [150 150 50]
-        scene  [{:color  0.85
-                 :center [150 150 -200]
-                 :radius 200}
-                ]
-        image  (ray/trace {:width 300 :height 300}
-                          scene camera)]
-    (view image)))
+  (time (let [camera [400 400 200]
+              scene  [{:color  0.85
+                       :center [400 400 -200]
+                       :radius 400}]
+              image  (ray/trace {:width 800 :height 800}
+                                scene camera)]
+          (view image))))
