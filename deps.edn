@@ -1,5 +1,6 @@
 {:paths ["src"]
- :deps  {org.clojure/clojure {:mvn/version "RELEASE"}}
+ :deps  {org.clojure/clojure    {:mvn/version "RELEASE"}
+         net.mikera/vectorz-clj {:mvn/version "RELEASE"}}
 
  :aliases
  {:nrepl {:extra-deps {cider/cider-nrepl {:mvn/version "RELEASE"}}

@@ -1,10 +1,11 @@
 (ns app.ray
-  (:require [app.vector         :as vector]
+  (:require [clojure.core.matrix           :as m]
+            [clojure.core.matrix.operators :as o]
             [app.objects.sphere :as sphere]))
 
 (defn lambert [sphere intersection ray]
-  (max 0 (vector/dot ray
-                     (sphere/normal sphere intersection))))
+  (max 0 (m/dot ray
+                (sphere/normal sphere intersection))))
 
 (defn first-hit [world pt ray]
   (->> (reduce (fn [world v]
@@ -13,7 +14,7 @@
                    world))
                []
                world)
-       (sort-by #(vector/distance (first %) pt))
+       (sort-by #(m/distance (first %) pt))
        first))
 
 (defn send-ray [scene src ray]
@@ -22,7 +23,7 @@
     0))
 
 (defn color-at [world camera x y]
-  (let [ray (vector/normalize (vector/sub [x y 0] camera))]
+  (let [ray (m/normalise (o/- [x y 0] camera))]
     (send-ray world camera ray)))
 
 (defn trace [{:keys [width height]} scene camera]

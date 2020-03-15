@@ -1,18 +1,21 @@
 (ns app.objects.sphere
-  (:require [app.vector :as vector]
+  (:require [clojure.core.matrix           :as m]
+            [clojure.core.matrix.operators :as o]
             [app.utils  :as utils]))
 
 (defn normal [sphere pt]
-  (vector/normalize
-   (vector/sub (:center sphere) pt)))
+  (m/normalise
+   (o/- (:center sphere) pt)))
 
 (defn intersection [sphere pt ray]
   (let [c (:center sphere)
-        a (vector/dot ray ray)
-        b (reduce + (vector/mul (vector/sub pt c) ray))
-        c (- (vector/dot (vector/sub pt c)
-                         (vector/sub pt c))
+        a (m/dot ray ray)
+        b (m/esum (o/* (o/- pt c)
+                       ray))
+        c (- (m/dot (o/- pt c)
+                    (o/- pt c))
              (utils/square (:radius sphere)))
         n (utils/quadratic a (* 2 b) c)]
     (when n
-      (vector/add (vector/mul [n n n] ray) pt))))
+      (o/+ (o/- n ray)
+           pt))))
