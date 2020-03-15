@@ -1,0 +1,1 @@
+src:/home/panthevm/.m2/repository/org/clojure/clojure/1.10.2-alpha1/clojure-1.10.2-alpha1.jar:/home/panthevm/.m2/repository/org/clojure/spec.alpha/0.2.187/spec.alpha-0.2.187.jar:/home/panthevm/.m2/repository/org/clojure/core.specs.alpha/0.2.44/core.specs.alpha-0.2.44.jar
